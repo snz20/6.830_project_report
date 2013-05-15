@@ -20,19 +20,17 @@ During the transition from the old to the new generation are called \textbf{vari
 \end{itemize}
 
 \begin{figure}[htb]
-	\begin{center}
+	\centering	
 		\includegraphics[scale=0.45]{Genetic_Program_Tree.png}
 	\caption[A function represented as a tree structure.]{A function represented as a tree structure. Source: Wikipedia}
 	\label{fig:Genetic_Program_Tree}
-	\end{center}
 \end{figure}
 
 \begin{figure}[htb]
-	\begin{center}
+	\centering
 		\includegraphics[width=0.8\textwidth]{genetic_programming_regression_synopsis.png}
 	\caption[Functioning of an evolutionary algorithm]{Functioning of an evolutionary algorithm: from an initial population of solutions, they are ranked according to their fitness, the worst ones are eliminated and the best ones are used to produce new solutions.}
 	\label{fig:algorithmes_evolutionnistes_synopsis}
-	\end{center}
 \end{figure}
 
 ~~\\
@@ -50,5 +48,16 @@ Appendix \ref{sec:app:implementation} gives details on the technical aspects of 
 \subsubsection{Background}
 Boosting is one of the most important developments in classification methodology. Boosting works by iteratively applying a classification algorithm to re-weighted versions of the training data and then taking a weighted majority vote of the sequence of classifiers thus produced. For many classification algorithms, this simple strategy results in dramatic improvements in performance. While boosting has evolved over the years, we focus on the most commonly used version of boosting known as Adaptive Boosting (AdaBoost) for binary classification developed by Freund and Schapire~\cite{boost96}.
 
-Let us look at a concise description of AdaBoost in a two-class classification setting. We have training data $(x_1, y_1), \ldots, (x_n, y_n)$ with $x_i$ a vector valued feature and $y_i = -1\text{ or }1$. 
+Let us look at a concise description of AdaBoost in a two-class classification setting. We have training data $(x_1, y_1), \ldots, (x_n, y_n)$ with $x_i$ a vector valued feature and $y_i = -1\text{ or }1$. We define $F(x) = \sum_1^M{c_mf_m(x)}$ where each $f_m(x)$ is a classifier producing values $1\text{ or }-1$ and $c_m$ are constants; the corresponding prediction is $\text{sign}(F(x))$. The AdaBoost procedure trains the classifiers $f_m(x)$ on weighted versions of the training sample, giving higher weight to cases that are currently misclassified. This is done for a sequence of weighted samples, and then the final classifier is a linear combination of the classifiers from each stage. The pseudocode for AdaBoost is given in Figure~\ref{fig:adaproc}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{ada.png}
+\caption{AdaBoost algorithm. $E_w$ represents expectation over the training data with weights $w=(w_1,w_2,\ldots,w_N)$ and $I_{(S)}$ is the indicator of the set $S$~\cite{alr00}.}
+\label{fig:adaproc}
+\end{figure}
+
+We used ``Stumps'' as weak learners. Stumps are single-split trees with only two terminal nodes. Stumps are simple to implement, typically have low variance and success of boosting depends on variance reduction~\cite{alr00}.
+
+
 \subsubsection{Madlib Implementation}
