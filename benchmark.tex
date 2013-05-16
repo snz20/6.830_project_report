@@ -98,7 +98,12 @@ if __name__ == "__main__":
 \end{verbatim}
 
 ~~\\
-On our benchmark server, calling the PostgreSQL PL/Python function using \textit{select * from testcase(20000);}, it takes on average 65 seconds, while when we call the usual Python script with 20000 as argument too it takes an average 48 seconds. The averages were computed running the queries and scripts 10 times. This result means that for some reason the CPython embedded in PostgreSQL 9.1 
+On our benchmark server, calling the PostgreSQL PL/Python function using \textit{select * from testcase(20000);}, it takes on average 65 seconds, while when we call the usual Python script with 20000 as argument too it takes an average 48 seconds. The averages were computed running the queries and scripts 10 times. This result means that for some reason the CPython that is embedded in PostgreSQL 9.1 is slower than the Python 2.7.3 we use outside PostgreSQL.
+
+~~\\
+We tested with PostgreSQL 9.2 (with Ubuntu 12.10 this time), and we still notice a runtime difference on my server (although overall 10\% faster, probably due to some new version of CPython). We also tried using plpython3u, which implements PL/Python based on the Python 3 language variant. plpythonu that we used before is equivalent to plpython2u, which implements PL/Python based on the Python 2 language variant. Using plpython3u is far slower (88 seconds), but when running the Python script using python3 it is also slower (75 seconds), although still significantly faster than plpython3u.
+
+~~\\
 
 
 
