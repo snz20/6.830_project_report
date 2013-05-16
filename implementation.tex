@@ -66,7 +66,17 @@ Let us look at a concise description of AdaBoost in a two-class classification s
 
 We used ``Stumps'' as weak learners. Stumps are single-split trees with only two terminal nodes. Stumps are simple to implement, typically have low variance and success of boosting depends on variance reduction~\cite{alr00}.
 
-
 \subsubsection{Madlib Implementation}
+The challenge in implementing (binary) Adaptive Boosting classification for MADlib is that, the algorithm is iterative in nature and in each iteration, it needs to make a pass over the entire training dataset as well as the weights data. Therefore, it cannot be implemented as a simple user-defined aggregate (UDA). We implemented AdaBoost as a driver UDF in Python. The control flow of the UDF is shown in Figure~\ref{fig:adaimp}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{adaimp.png}
+\caption{Control Flow of AdaBoost Implementation for MADlib.}
+\label{fig:adaimp}
+\end{figure}
+
+The row-by-row, batched and in-memory versions differ only in how we access the training and test dataset and weights table. See Appendix D for documentation of AdaBoost module.
+
 
 
