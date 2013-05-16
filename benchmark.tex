@@ -111,17 +111,19 @@ TODO: try on my VM and conclude
 
 So far our modules have loaded all the data in memory, then performed the computations on them. However, in some situation we might not have enough memory to store all the data. In older to circumvent this issue our modules allow to define the amount of memory the user wants to grant to the module. To do so, the user can choose the batch size, which corresponds to the number of rows the module can put in memory. At each iteration of the algorithm, we retrieve data in batches. Since we cannot store them in memory, it means we will have in total an important amount of queries to the database. The smaller the memory the user grants to the module, the higher the amount of queries to retrieved data at each iteration will be.
 
-Figure \ref{fig:gp-batch-histo} shows the effect of the batch size in the case of the symbolic regression.
+~~\\
+Figure \ref{fig:gp-batch-histo} shows the effect of the batch size in the case of the symbolic regression. We fixed the parameters and only changed the batch size. As we can see, having a batch size of 10,000 rows or a batch size of 1,000 rows is a pretty good trade-off: for batch size = 10,000 rows, the runtime is 1.5  times bigger, and for batch size = 1,000 rows, the runtime a bit less than twice bigger. TODO: add reference to the table in the appendix. Since the memory used is proportional to the batch size, it makes using large batches look attractive. However, if we further decrease the batch size, we see that it starts having a very negative impact on the runtime.
 
-
+~~\\
 Table~\ref{tab:adaSynth1} shows the runtimes and Table~\ref{tab:adaSynth2} shows the memory usage of row-by-row execution, batched execution and all-in-memory execution of AdaBoost when it is run on a synthetic dataset of varying size. 
 
+~~\\
 , \ref{fig:adabatch1} and \ref{fig:adabatch2} 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[height=180px]{gp-batch-histo.png}
-\caption{Runtimes of row-by-row, batched and all-in-memory execution of symbolic regression.}
+\caption{Runtimes of row-by-row, batched and all-in-memory execution of symbolic regression. The dataset contains 100,000 rows. Having a batch size of 10,000 rows means that at each iteration we do $100,000/10,000 = 10$ queries on the database}
 \label{fig:gp-batch-histo}
 \end{figure}
 
