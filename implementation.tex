@@ -14,16 +14,16 @@ MADlib uses user-defined aggregates (UDA) as a basic building block in the macro
 
 However, UDAs are not enough for implementing iterative algorithms which perform multiple passes over the data.
 
-\subsection*{Driver functions for Multipass Iteration}
+\subsubsection*{Driver functions for Multipass Iteration}
 Many statistical and machine learning algorithms are iterative in nature and do multiple passes over the dataset. They cannot be implemented as simple UDAs. MADlib implements complex iterative methods by writing driver user-defined functions (UDF) in Python to control iteration. The driver UDF stores any inter-iteration output into a temporary table and reuses the resulting table in subsequent iterations as needed. Final outputs are also stored in tables unless they are small, and can be queried as needed. As a result all data movement is done inside database engine and its bufferpool.
 
-\subsection*{Support for Microprogramming}
+\subsubsection*{Support for Microprogramming}
 MADlib implements row-level UDFs (functions that are called multiple times per row) in C or C++. Thus, these functions can call open source libraries like LAPACK or Eigen. MADlib also includes a sparse matrix library written in C.
 
-\subsection*{C++ abstraction layer for UDFs} 
+\subsubsection*{C++ abstraction layer for UDFs} 
 MADlib provides a C++ abstraction layer for making it easier to write driver UDFs. UDFs can be written using standard C++ atomic types as well as vector and matrix types that are native to linear algebra operations. The C++ abstraction layer also provides memory management and exception handling support. Finally, it includes third-party libraries so that developers can write efficient code.
 
-\subsection*{Python support for UDFs}
+\subsubsection*{Python support for UDFs}
 MADlib is still in its early stages of development. So it does not provide a full-fledged Python abstraction layer for writing driver UDFs. It only provides a database access layer via {\ttfamily plpy.py} module. PostrgreSQL PL/Python language currently uses an internal plpy.py module to implement seamless DB access (using classic PyGreSQL interface, pg). The python abstraction layer is still under development.
 
 Currently, most of the MADlib functions require to be cognizant of the schema of the input tables and produce output table with fixed schema. 
