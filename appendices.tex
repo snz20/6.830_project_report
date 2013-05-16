@@ -36,7 +36,35 @@ postgres=\# alter role postgres with password 'postgres';
 /usr/local/madlib/bin/madpack -p postgres -c \$USER@\$HOST/\$DATABASE install-check
 
 
-\section*{Appendix B: Installing a module in Madlib}
+\section*{Appendix B: Creating a module in Madlib}
+
+Create a new function testpy. We are going to create this section in any module called 'testmod'.
+
+\begin{itemize}
+  \item Add new module folder: ./src/ports/postgres/modules/testmod/
+  \item Create in this folder the following files:
+
+\begin{itemize}
+  \item \_\_init\_\_.py\_in  
+  \item testmod.py\_in
+  \item testmod.sql\_in
+\end{itemize}
+
+\item Modify ./src/config/Modules.yml and add a new line "	- name: testmod"
+  \item recompile MADlib: with any user:
+
+\begin{itemize}
+  \item ./configure
+  \item make install      \# (no need for make clean) (in the MADlib build folder)
+\end{itemize}
+  \item re-register MADlib into Postgresql (with postgres user):
+  \begin{itemize}
+  \item  /usr/local/madlib/bin/madpack -p postgres -c \$USER@\$HOST/postgres reinstall
+  \end{itemize}
+
+
+ \end{itemize}
+ 
 
 
 \section*{Appendix C: Sample run of GP}
