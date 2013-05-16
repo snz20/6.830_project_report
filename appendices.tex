@@ -1,40 +1,56 @@
 
 \section*{Appendix A: Installing Madlib with PostgreSQL}
+The following instructions have been tested on Ubuntu 12.04 x64. They will not work with Ubuntu 12.04 x32 (MADlib does not have support for Ubuntu 32-bit). Also, MADlib doesn't work with GCC 4.7.*. Since,  Ubuntu 12.10 ships with GCC 4.7.2 it might be an issue while installing MADlib on Ubuntu 12.10.
 
+\vspace{\baselineskip}
+{\raggedleft Install PostgreSQL packages:}
+\begin{verbatim}
+$ sudo apt-get -y install \
+  postgresql-9.1 libpq-dev \
+  postgresql-server-dev-9.1 \
+  postgresql-plpython-9.1
+\end{verbatim}
 
-These instructions have been tested on Ubuntu 12.04 x64. It won't work with Ubuntu 12.04 x32 (MADlib does not have support for Ubuntu 32-bit). Also, MADlib doesn't work with GCC 4.7.*, so since Ubuntu 12.10 ships with GCC 4.7.2 it might be an issue.
+{\raggedleft Download MADlib from \url{http://madlib.net} and copy .tar file to server:}
+\begin{verbatim}
+$ wget https://github.com/madlib/madlib/zipball/v0.5.0
+$ unzip v0.5.0
+$ cd madlib-madlib-5fabd88
+\end{verbatim}
 
-~~\\
-\# install postgres packages \\
-sudo apt-get -y install postgresql-9.1 libpq-dev postgresql-server-dev-9.1 postgresql-plpython-9.1
+{\raggedleft Build Madlib:}
+\begin{verbatim}
+$ sudo apt-get -y install cmake
+$ sudo apt-get -y install m4 gcc-4.6 g++-4.6 g++
+$ ./configure
+$ cd build/
+$ make
+$ make doc
+$ make install
+\end{verbatim}
 
-\# Download madlib from http://madlib.net and copy tar file to server \\
-wget https://github.com/madlib/madlib/zipball/v0.5.0
-unzip v0.5.0
-cd madlib-madlib-5fabd88 
+{\raggedleft Connect to the database:}
+\begin{verbatim}
+$ sudo su - postgres
+$ psql
+\end{verbatim}
 
-\# Build Madlib \\
-sudo apt-get -y install cmake
-sudo apt-get -y install m4 gcc-4.6 g++-4.6 g++
-./configure
-cd build/
-make
-make doc
-make install
+{\raggedleft Add a password to a role:}
+\begin{verbatim}
+postgres=# ALTER ROLE postgres WITH PASSWORD 'postgres';
+\end{verbatim}
 
-\# To connect to the database: \\
-sudo su - postgres
-psql
+{\raggedleft Register Madlib with the PostgreSQL database}
+\begin{verbatim}
+$ /usr/local/madlib/bin/madpack -p postgres -c \ 
+  \$USER@\$HOST/postgres install
+\end{verbatim}
 
-\# To add a password to a role: (note: might be more convenient to use a 1-letter password when coding for MADlib as we'll keep having to enter the password each time we reinstall it) \\
-postgres=\# alter role postgres with password 'postgres';
-
-\# To register Madlib with the postgres database \\
-/usr/local/madlib/bin/madpack -p postgres -c \$USER@\$HOST/postgres install
-
-\# To test your installation you can run the install check procedure: \\
-/usr/local/madlib/bin/madpack -p postgres -c \$USER@\$HOST/\$DATABASE install-check
-
+{\raggedleft Test the installation by running install check procedure:}
+\begin{verbatim}
+$ /usr/local/madlib/bin/madpack -p postgres -c \
+  \$USER@\$HOST/\$DATABASE install-check
+\end{verbatim}
 
 \section*{Appendix B: Creating a module in Madlib}
 
@@ -76,7 +92,7 @@ The {\itshape training data} as well as {\itshape test data} is expected to be o
 
 \begin{verbatim}
 TABLE tableName (
-    id INTEGER, // 1 indexed
+    id INTEGER, // should be 1 indexed
     attribute1 DOUBLE PRECISION,
     ...
     attributeN DOUBLE PRECISION,
