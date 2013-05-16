@@ -138,7 +138,32 @@ As we can see from the tables, runtime of both of the algorithms increase as we 
 \subsubsection*{\itshape Effect of varying independent variables on runtime.}
 
 \subsubsection*{\itshape Performance inside and outside MADlib}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{ada1.png}
+\caption{Runtimes of AdaBoost algorithm inside and outside MADlib.}
+\label{fig:adainout}
+\end{figure}
 
 \subsubsection*{\itshape Performance of batched execution.}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{ada2.png}
+\caption{Runtimes of row-by-row, batched and all-in-memory execution of AdaBoost algorithm on BUPA liver disorder dataset.}
+\label{fig:adabatch1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{ada3.png}
+\caption{Runtimes of row-by-row, batched and all-in-memory execution of AdaBoost algorithm on synthetic dataset.}
+\label{fig:adabatch2}
+\end{figure}
 
 \subsubsection*{\itshape Effect of varying independent variables on memory usage.}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{ada4.png}
+\caption{Memory usage by AdaBoost algorithm on synthetic dataset.}
+\label{fig:adamem}
+\end{figure}
