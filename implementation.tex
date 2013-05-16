@@ -4,7 +4,7 @@
 \subsection{Genetic Programming for symbolic regression}
 \subsubsection{Background}
 
-Genetic programming belongs to the evolutionary algorithms, which is a family of optimization algorithms based on the principle of \textbf{Darwinian natural selection}. As part of natural selection, a given environment has a population of individuals that compete for survival and reproduction. The ability of each individual to achieve these goals determines their chance to have children, in other words to pass on their genes to the next generation of individuals, who for genetic reasons will have an increased chance of doing well, even better, in realizing these two objectives.
+Genetic programming is a subset of evolutionary algorithms, which is a family of optimization algorithms based on the principle of \textbf{Darwinian natural selection}. As part of natural selection, a given environment has a population of individuals that compete for survival and reproduction. The ability of each individual to achieve these goals determines their chance to have children, in other words to pass on their genes to the next generation of individuals, who for genetic reasons will have an increased chance of doing well, even better, in realizing these two objectives.
 
 ~~\\
 This principle of continuous improvement over the generations is taken by evolutionary algorithms to optimize solutions to a problem. In the \textbf {initial generation}, a \textbf{population} composed of different \textbf {individuals} is generated randomly or by other methods. An individual is a solution to the problem, more or less good: the quality of the individual in regards to the problem is called \textbf{fitness}, which reflects the adequacy of the solution to the problem to be solved. The higher the fitness of an individual, the higher it is likely to pass some or all of its genotype to the individuals of the next generation.
@@ -19,6 +19,15 @@ During the transition from the old to the new generation are called \textbf{vari
 	\item the \textbf{crossover operators}, which are used to cross at least two different genotypes, as genetic crosses from breeding.
 \end{itemize}
 
+The figure \ref{fig:algorithmes_evolutionnistes_synopsis} summarizes how an evolutionary algorithm works.
+
+\begin{figure}[htb]
+	\centering
+		\includegraphics[width=0.8\textwidth]{genetic_programming_regression_synopsis.png}
+	\caption[Functioning of an evolutionary algorithm]{Functioning of an evolutionary algorithm: from an initial population of solutions (in symbolic regression, a solution is the tree representing a fraction), they are ranked according to their fitness, the worst ones are eliminated and the best ones are used to produce new solutions.}
+	\label{fig:algorithmes_evolutionnistes_synopsis}
+\end{figure}
+
 \begin{figure}[htb]
 	\centering	
 		\includegraphics[scale=0.45]{Genetic_Program_Tree.png}
@@ -26,15 +35,8 @@ During the transition from the old to the new generation are called \textbf{vari
 	\label{fig:Genetic_Program_Tree}
 \end{figure}
 
-\begin{figure}[htb]
-	\centering
-		\includegraphics[width=0.8\textwidth]{genetic_programming_regression_synopsis.png}
-	\caption[Functioning of an evolutionary algorithm]{Functioning of an evolutionary algorithm: from an initial population of solutions, they are ranked according to their fitness, the worst ones are eliminated and the best ones are used to produce new solutions.}
-	\label{fig:algorithmes_evolutionnistes_synopsis}
-\end{figure}
-
 ~~\\
-Genetic programming is a perfect suit for symbolic regression. The term "symbolic regression" represents the process during which measured data are fitted by suitable mathematical formula like $x^2 + C$, $sin(x) + 1/e^x$,  etc. This process is quite well known amongst mathematician and is used when some data of unknown process are obtained. The domain of symbolic regression is of functional nature, i.e. it consists of a function set like ($sin()$, $cos()$, $gamma()$, $MyFunction()$,...) and so called terminal set ($t$, $x$, $p$, ...). From a mix of both sets is then synthesized the final program, which can have a complicated structure. We plan to use genetic programming for symbolic regression in order to unravel unknown relation between some given attributes of a relation.   
+Genetic programming is a perfect suit for symbolic regression. The term "symbolic regression" represents the process during which measured data are fitted by suitable mathematical formula like $x^2 + C$, $sin(x) + 1/e^x$,  etc. The figure \ref{fig:Genetic_Program_Tree} shows how a formula can the represented as a tree. This process is quite well known amongst mathematician and is used when some data of unknown process are obtained. The domain of symbolic regression is of functional nature, i.e. it consists of a function set like ($sin()$, $cos()$, $gamma()$, $MyFunction()$,...) and so called terminal set ($t$, $x$, $p$, ...). The final program is synthesized from a mixture of both sets, and can be quite complicated from a structural point of view. We plan to use genetic programming for symbolic regression in order to unravel unknown relation between some given attributes of a relation. 
 
 
 \subsubsection{Madlib Implementation}
