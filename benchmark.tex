@@ -115,10 +115,11 @@ So far our modules have loaded all the data in memory, then performed the comput
 Figure \ref{fig:gp-batch-histo} shows the effect of the batch size in the case of the symbolic regression. We fixed the parameters and only changed the batch size. As we can see, having a batch size of 10,000 rows or a batch size of 1,000 rows is a pretty good trade-off: for batch size = 10,000 rows, the runtime is 1.5  times bigger, and for batch size = 1,000 rows, the runtime a bit less than twice bigger. TODO: add reference to the table in the appendix. Since the memory used is proportional to the batch size, it makes using large batches look attractive. However, if we further decrease the batch size, we see that it starts having a very negative impact on the runtime.
 
 ~~\\
-Table~\ref{tab:adaSynth1} shows the runtimes and Table~\ref{tab:adaSynth2} shows the memory usage of row-by-row execution, batched execution and all-in-memory execution of AdaBoost when it is run on a synthetic dataset of varying size. 
+Figures \ref{fig:adabatch1} and \ref{fig:adabatch2} shows the impact of the batch size on the runtime when the number of iterations increases.
 
 ~~\\
-, \ref{fig:adabatch1} and \ref{fig:adabatch2} 
+Table~\ref{tab:adaSynth1} shows the runtimes and Table~\ref{tab:adaSynth2} shows the memory usage of row-by-row execution, batched execution and all-in-memory execution of AdaBoost when it is run on a synthetic dataset of varying size. 
+
 
 \begin{figure}[ht]
 \centering
