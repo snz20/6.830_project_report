@@ -1,9 +1,14 @@
 
-\section{Benchmark Components}
-\label{sec:benchcomp}
+\section{Benchmark}
+\label{sec:bench}
+In this section, we show the results of the benchmarks that we performed to assess the performance of our implementations in various settings. We also discuss the implications of the results that we found.
 \subsection{Setup}
-\subsection{Dataset}
-\section{Benchmark Results}
-\label{sec:benchresult}
+We ran the benchmark on PostgreSQL 9.1.9 and MADlib v3.0 on a single machine on a gigabit  ethernet cluster which runs Ubuntu 12.04 LTS and has 4GB RAM, a 10GB SATA HDD and a Core 2 Duo 2.4GHz CPU. 
+
+For benchmarking the performance of GP for Symbolic Regression we used a synthetic dataset containing 100,000 rows, 3 inputs and 1 output. The function we used to generate the data is $x_1*(x_2^2+x_3)$.
+
+For benchmarking the performance of AdaBoost, we used BUPA liver disorder dataset which contains blood test results of 345 male individuals. This dataset is available at \url{http://www.cs.huji.ac.il/~shais/datasets/ClassificationDatasets.html}. We also used a synthetic dataset which consisted of $240000\times11$ matrix where first 10 columns are real valued random numbers and the last column indicates the class.
+
+Each run of our algorithms inside MADlib was cold start meaning that we cleared the caches and restarted the database service (PostgreSQL) for every run.
 \subsection{Results}
 \subsection{Analysis}
