@@ -65,7 +65,47 @@ Create a new function testpy. We are going to create this section in any module 
  
 
 
-\section*{Appendix C: How to use GP module in MADlib}
+\section*{Appendix C: How to use Genetic Programming module in MADlib}
+
+We are going to over an example that shows how to perform symbolic regression using the genetic programming module in MADlib. First we generate an artificial dataset using MATLAB that will contain 100,000 rows:
+
+\begin{verbatim}
+x1 = 1:0.0001:(10+5000);
+x2 = 10:0.0001:(19+5000);
+x3 = 5:0.0001:(14+5000);
+a =[x1; x2; x3; x1.*(x2.^2+x3)]';
+csvwrite('mock.csv', a(1:100000, :))
+\end{verbatim}
+
+{\raggedleft Then we import this dataset within PostgreSQL:}
+\begin{verbatim}
+CREATE TABLE mock (X1 real, X2 real, X3 real, Y1 real);
+COPY mock FROM '/root/mock.csv' DELIMITERS ',' CSV;
+\end{verbatim}
+
+{\raggedleft Lastly we run the symbolic regression, with 100 individuals per population size, 20 generations, and to maximum size of the trees of 3. We take 3 attributes as input (x1, x2 and x3) and one attribute as output (y1).}
+\begin{verbatim}
+SELECT * from MADLIB.gp('mock', '{x1, x2, x3}', '{y1}', 100, 20, 3);
+\end{verbatim}
+
+{\raggedleft The above query produces the following output:}
+\begin{verbatim}
+SELECT * from MADLIB.gp('mock', '{x1, x2, x3}', '{y1}', 100, 20, 3);
+           individual            |      fitness
+---------------------------------+-------------------
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+ [mul, add, mul, x2, x2, x3, x1] | 0.000442927237356
+(9 rows)
+\end{verbatim}
+
+Each row corresponds to one individual, i.e. one formula. In this example, all rows correspond to the formula $x_1*(x_2^2+x_3)$, which is what we wanted to find. The fitness reflects how accurate each individual is. The lowest the fitness, the most accurate the formula is.
 
 
 \section*{Appendix D: How to use AdaBoost module in MADlib}
