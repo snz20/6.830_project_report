@@ -67,11 +67,14 @@ Genetic programming is a perfect suit for symbolic regression. The term "symboli
 
 
 \subsubsection{Madlib Implementation}
-TODO
+We implemented the symbolic regression using genetic programming within a Python module for MADlib that depends on the Python evolutionary computation framework DEAP ~\cite{DEAPJMLR2012}. The user can choose whether to store the data in memory, or retrieve by batch: this is a CPU vs. RAM trade-off.
 
-DEAP
+~~\\
+Below is an example of a query that runs a symbolic regression, with 100 individuals per population size, 20 generations, and with a maximum size of the trees of 3. It takes 3 attributes as input (x1, x2 and x3) and one attribute as output (y1):
 
-Appendix \ref{sec:app:implementation} gives details on the technical aspects of the implementation.
+\begin{verbatim}
+postgres=# SELECT * from madlib.gp('mock', '{x1, x2, x3}', '{y1}', 100, 20, 3);
+\end{verbatim}
 
 \subsection{Adaptive Boosting}
 \subsubsection{Background}
