@@ -24,7 +24,7 @@ MADlib implements row-level UDFs (functions that are called multiple times per r
 MADlib provides a C++ abstraction layer for making it easier to write driver UDFs. UDFs can be written using standard C++ atomic types as well as vector and matrix types that are native to linear algebra operations. The C++ abstraction layer also provides memory management and exception handling support. Finally, it includes third-party libraries so that developers can write efficient code.
 
 \subsubsection*{Python support for UDFs}
-MADlib is still in its early stages of development. So it does not provide a full-fledged Python abstraction layer for writing driver UDFs. It only provides a database access layer via {\ttfamily plpy.py} module. PostrgreSQL PL/Python language currently uses an internal plpy.py module to implement seamless DB access (using classic PyGreSQL interface, pg). The python abstraction layer is still under development.
+MADlib is still in its early stages of development. It does not provide a full-fledged Python abstraction layer for writing driver UDFs. It only provides a database access layer via {\ttfamily plpy.py} module using classic PyGreSQL interface named {\ttfamily pg}. 
 
 Currently, most of the MADlib functions require to be cognizant of the schema of the input tables and produce output table with fixed schema. 
 

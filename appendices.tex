@@ -1,12 +1,54 @@
 \section*{Appendix A: Tables showing Benchmarking Results}
+The following tables show benchmarking results for symbolic regression using genetic programming and classification using adaptive boosting.
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multirow{3}{*}{Pop size} & \multirow{3}{*}{\# of gen.} & \multicolumn{3}{|c|}{Runtimes (sec)}\\
+\cline{3-5}
+& &Outside MADlib&Outside MADlib&\multirow{2}{*}{Inside MADlib}\\
+& &from PostgreSQL&from File&\\
+\hline
+5 & 5 & 5.513 & 4.860 & 6.787 \\ \hline
+10& 5 & 7.166 & 6.295 & 8.560 \\\hline
+20& 5 & 13.879 & 12.484 & 17.610 \\\hline
+50& 5 & 32.568 & 30.637 & 44.261 \\\hline
+100& 5 & 65.385 & 62.013 & 88.910 \\\hline
+200& 5 & 135.105 & 128.238 & 182.672 \\\hline
+500& 5 & 300.677 & 314.149 &425.092 \\\hline
+1000& 5 & 597.274 &582.635 &810.041 \\\hline
+5& 10 & 7.888 & 7.669& 10.523 \\\hline
+5& 20 & 11.245 & 11.137 & 16.282 \\\hline
+5& 50 & 25.119 & 23.975 & 35.220 \\\hline
+5& 100 & 47.355 & 46.355 & 69.156 \\\hline
+5& 200 & 92.778 & 95.063 & 119.511 \\\hline
+5& 500 & 226.639 & 239.827 & 293.664 \\\hline
+5& 1000 & 491.201 & 489.361 & 591.823 \\\hline
+20& 20 & 44.813 & 44.813 & 56.965 \\
+\hline
+\end{tabular}
+\caption{Symbolic Regression runtimes on synthetic dataset.}
+\label{tab:GPruntimes}
+\end{table}
+
 
 \begin{table}[!htbp]
+\small
 \centering
-\begin{tabular}{lcc}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Pop; Gen} & \multicolumn{6}{|c|}{Runtimes (sec)}\\
+\cline{2-7}
+& All-in-Memory & 10000-row batch & 1000-row batch & 100-row batch & 10-row batch & Row-by-Row \\
+\hline
+5; 5 & 6.787 & 11.012 & 14.220 &  93.387 & 845.325 &8153.139 \\
+\hline
 \end{tabular}
-\caption{GP runtimes on synthetic dataset}
-\label{tab:gp}
+\caption{Symbolic Regression runtimes on synthetic dataset. Pop stands for population size. Gen stands for number of generations.}
+\label{tab:GPbatchRunTimes}
 \end{table}
+
 
 \begin{table}[!htbp]
 \small
@@ -117,56 +159,6 @@
 \end{tabular}
 \caption{AdaBoost memory usage for synthetic dataset}
 \label{tab:adaSynth2}
-\end{table}
-
-
-\begin{table}[!htbp]
-\small
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\multirow{3}{*}{Pop size} & \multirow{3}{*}{\# of gen.} & \multicolumn{3}{|c|}{Runtimes (sec)}\\
-\cline{3-5}
-& &Outside MADlib&Outside MADlib&\multirow{2}{*}{Inside MADlib}\\
-& &from PostgreSQL&from File&\\
-\hline
-5 & 5 & 5.513 & 4.860 & 6.787 \\ \hline
-10& 5 & 7.166 & 6.295 & 8.560 \\\hline
-20& 5 & 13.879 & 12.484 & 17.610 \\\hline
-50& 5 & 32.568 & 30.637 & 44.261 \\\hline
-100& 5 & 65.385 & 62.013 & 88.910 \\\hline
-200& 5 & 135.105 & 128.238 & 182.672 \\\hline
-500& 5 & 300.677 & 314.149 &425.092 \\\hline
-1000& 5 & 597.274 &582.635 &810.041 \\\hline
-5& 10 & 7.888 & 7.669& 10.523 \\\hline
-5& 20 & 11.245 & 11.137 & 16.282 \\\hline
-5& 50 & 25.119 & 23.975 & 35.220 \\\hline
-5& 100 & 47.355 & 46.355 & 69.156 \\\hline
-5& 200 & 92.778 & 95.063 & 119.511 \\\hline
-5& 500 & 226.639 & 239.827 & 293.664 \\\hline
-5& 1000 & 491.201 & 489.361 & 591.823 \\\hline
-20& 20 & 44.813 & 44.813 & 56.965 \\
-\hline
-\end{tabular}
-\caption{Symbolic Regression runtimes on synthetic dataset.}
-\label{tab:GPruntimes}
-\end{table}
-
-
-\begin{table}[!htbp]
-\small
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline
-\multirow{2}{*}{Pop; Gen} & \multicolumn{6}{|c|}{Runtimes (sec)}\\
-\cline{2-7}
-& All-in-Memory & 10000-row batch & 1000-row batch & 100-row batch & 10-row batch & Row-by-Row \\
-\hline
-5; 5 & 6.787 & 11.012 & 14.220 &  93.387 & 845.325 &8153.139 \\
-\hline
-\end{tabular}
-\caption{Symbolic Regression runtimes on synthetic dataset. Pop stands for population size. Gen stands for number of generations.}
-\label{tab:GPbatchRunTimes}
 \end{table}
 
 
