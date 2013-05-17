@@ -95,10 +95,6 @@ On our benchmark server, calling the PostgreSQL PL/Python function using \textit
 ~~\\
 We tested with PostgreSQL 9.2 (with Ubuntu 12.10 this time), and we still notice a runtime difference on my server (although overall 10\% faster, probably due to some new version of CPython). We also tried using plpython3u, which implements PL/Python based on the Python 3 language variant. plpythonu that we used before is equivalent to plpython2u, which implements PL/Python based on the Python 2 language variant. Using plpython3u is far slower (88 seconds), but when running the Python script using python3 it is also slower (75 seconds), although still significantly faster than plpython3u.
 
-~~\\
-TODO: try on my VM and conclude
-
-
 \subsubsection*{Performance of batched execution.}
 So far our modules have loaded all the data in memory, then performed the computations on them. However, in some situation we might not have enough memory to store all the data. In older to circumvent this issue our modules allow to define the amount of memory the user wants to grant to the module. To do so, our GP implementation lets the user to choose the batch size, which corresponds to the number of rows the module can put in memory and the AdaBoost implementation lets the user to choose the number of batches (dataset will be divided into the number of partitions chosen by the user). At each iteration of the algorithm, we retrieve data in batches. Since we cannot store them in memory, it means we will have in total a significant amount of read/write accesses to the database. The smaller the batch size the higher the amount of read/write queries at each iteration will be.
 \begin{figure}[ht]
