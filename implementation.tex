@@ -1,6 +1,7 @@
 \section{Implementation of Algorithms}
 \label{sec:imp}
 In this section, we discuss the implementation details of our algorithm. Before diving into the details of our implementations, first we look at the architecture of MADlib. Then we discuss the background and implementation details of genetic programming and adaptive boosting.
+
 \subsection{Understanding MADlib architecture}
 Performing linear algebra over matrices is at the heart of many statistical methods.And it is quite challenging for relational databases to operate over very large matrices. At a macroscopic scale, the matrices need to be partitioned intelligently so that the partitions can be fit into memory of a single machine and then there should be options for movement of these partitions in and out of database by using SQL constructs. At microscopic level, the database engine needs to be able to invoke efficient linear algebra functions on the data partitions. MADlib uses a number of techniques to address these challenges:
 
@@ -12,6 +13,7 @@ MADlib uses user-defined aggregates (UDA) as a basic building block in the macro
 \item A {\it final function} that takes a transition state and transforms it into output value.
 \end{itemize}
 
+~~\\
 However, UDAs are not enough for implementing iterative algorithms which perform multiple passes over the data.
 
 \subsubsection*{Driver functions for Multipass Iteration}
@@ -26,11 +28,11 @@ MADlib provides a C++ abstraction layer for making it easier to write driver UDF
 \subsubsection*{Python support for UDFs}
 MADlib is still in its early stages of development. It does not provide a full-fledged Python abstraction layer for writing driver UDFs. It only provides a database access layer via {\ttfamily plpy.py} module using classic PyGreSQL interface named {\ttfamily pg}. 
 
+~~\\
 Currently, most of the MADlib functions require to be cognizant of the schema of the input tables and produce output table with fixed schema. 
 
 \subsection{Genetic Programming for symbolic regression}
 \subsubsection{Background}
-
 Genetic programming is a subset of evolutionary algorithms, which is a family of optimization algorithms based on the principle of \textbf{Darwinian natural selection}. As part of natural selection, a given environment has a population of individuals that compete for survival and reproduction. The ability of each individual to achieve these goals determines their chance to have children, in other words to pass on their genes to the next generation of individuals, who for genetic reasons will have an increased chance of doing well, even better, in realizing these two objectives.
 
 ~~\\
@@ -80,6 +82,7 @@ postgres=# SELECT * from madlib.gp('mock', '{x1, x2, x3}', '{y1}', 100, 20, 3);
 \subsubsection{Background}
 Boosting is one of the most important developments in classification methodology. Boosting works by iteratively applying a classification algorithm to re-weighted versions of the training data and then taking a weighted majority vote of the sequence of classifiers thus produced. For many classification algorithms, this simple strategy results in dramatic improvements in performance. While boosting has evolved over the years, we focus on the most commonly used version of boosting known as Adaptive Boosting (AdaBoost) for binary classification developed by Freund and Schapire~\cite{boost96}.
 
+~~\\
 Let us look at a concise description of AdaBoost in a two-class classification setting. We have training data $(x_1, y_1), \ldots, (x_n, y_n)$ with $x_i$ a vector valued feature and $y_i = -1\text{ or }1$. We define $F(x) = \sum_1^M{c_mf_m(x)}$ where each $f_m(x)$ is a classifier producing values $1\text{ or }-1$ and $c_m$ are constants; the corresponding prediction is $\text{sign}(F(x))$. The AdaBoost procedure trains the classifiers $f_m(x)$ on weighted versions of the training sample, giving higher weight to cases that are currently misclassified. This is done for a sequence of weighted samples, and then the final classifier is a linear combination of the classifiers from each stage. The pseudocode for AdaBoost is given in Figure~\ref{fig:adaproc}.
 
 \begin{figure}[ht]
@@ -89,6 +92,7 @@ Let us look at a concise description of AdaBoost in a two-class classification s
 \label{fig:adaproc}
 \end{figure}
 
+~~\\
 We used ``Stumps'' as weak learners. Stumps are single-split trees with only two terminal nodes. Stumps are simple to implement, typically have low variance and success of boosting depends on variance reduction~\cite{alr00}.
 
 \subsubsection{Madlib Implementation}
@@ -101,7 +105,7 @@ The challenge in implementing (binary) Adaptive Boosting classification for MADl
 \label{fig:adaimp}
 \end{figure}
 
+~~\\
 The row-by-row, batched and in-memory versions differ only in how we access the training and test dataset and weights table. See Appendix E for documentation of usage of AdaBoost module.
-
 
 

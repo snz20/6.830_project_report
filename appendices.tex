@@ -160,9 +160,7 @@ The following tables show benchmarking results for symbolic regression using gen
 \caption{AdaBoost memory usage for synthetic dataset}
 \label{tab:adaSynth2}
 \end{table}
-
-
-
+\pagebreak
 \section*{Appendix B: Installing Madlib with PostgreSQL}
 The following instructions have been tested on Ubuntu 12.04 x64. They will not work with Ubuntu 12.04 x32 (MADlib does not have support for Ubuntu 32-bit). Also, MADlib doesn't work with GCC 4.7.*. Since,  Ubuntu 12.10 ships with GCC 4.7.2 it might be an issue while installing MADlib on Ubuntu 12.10.
 
@@ -207,13 +205,13 @@ postgres=# ALTER ROLE postgres WITH PASSWORD 'postgres';
 {\raggedleft Register Madlib with the PostgreSQL database}
 \begin{verbatim}
 $ /usr/local/madlib/bin/madpack -p postgres -c \ 
-  \$USER@\$HOST/postgres install
+  $USER@$HOST/postgres install
 \end{verbatim}
 
 {\raggedleft Test the installation by running install check procedure:}
 \begin{verbatim}
 $ /usr/local/madlib/bin/madpack -p postgres -c \
-  \$USER@\$HOST/\$DATABASE install-check
+  $USER@$HOST/$DATABASE install-check
 \end{verbatim}
 
 \section*{Appendix C: Creating a module in Madlib}
@@ -344,6 +342,7 @@ postgres=# SELECT * from madlib.adaboost_train_and_classify (
            );
 \end{verbatim}
 
+~~\\
 When the dataset cannot be fit into memory, the user can use either batched or row-by-row version of AdaBoost.
 \vspace{\baselineskip}
 {\raggedleft Perform row-by-row version of AdaBoost classification:}
